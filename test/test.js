@@ -15,7 +15,7 @@ describe("RentAgreement", function () {
     //await rentAgreement.deployed();
   });
 
-  before("should allow the landlord to set the tenant", async function () {
+  it("should allow the landlord to set the tenant", async function () {
     await rentAgreement.connect(owner).setTenant(tenant.address);
     const setTenantAddress = await rentAgreement.tenant();
     expect(setTenantAddress).to.equal(tenant.address);
@@ -47,15 +47,13 @@ describe("RentAgreement", function () {
     const expectedRentPaidUntil = now + 30 * 24 * 60 * 60;
 
     const rentPaidUntil = await rentAgreement.rentPaidUntil();
-    console.log(rentPaidUntil);
+    //console.log(rentPaidUntil);
 
     const amountToPay = now > rentPaidUntil ? rentAmount + penaltyAmount : rentAmount;
-    console.log(now)
+    //console.log(now)
     await rentAgreement.connect(tenant).payRent({ value: amountToPay });
 
-    const newPaidUntil = await rentAgreement.rentPaidUntil();
-    
-
+    //const newPaidUntil = await rentAgreement.rentPaidUntil();
     
   });
 
